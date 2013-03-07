@@ -1,0 +1,30 @@
+<h1> <%= @league.name %> 
+  League</h1>
+
+<table>
+  <tr>
+    <th>Teams</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @teams.each do |team| %>
+  <tr>
+    <td><%= team.name %></td>
+     
+    <td><b>Created:</b> <%= time_ago_in_words(team.created_at) %> ago </td>
+  <td><b>Updated:</b> <%= time_ago_in_words(team.updated_at) %> ago </td>
+    <td><%= link_to 'Show', team %></td>
+    <td><%= link_to 'Edit', edit_team_path(team) %></td>
+    <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<td>
+  </tr>
+
+<% end %>
+ <tr>
+<td>  
+<%= link_to 'Join this Team', '/teams/new?league_id='  + @league.id.to_s %></td>
+
+</tr>
+
+</table>

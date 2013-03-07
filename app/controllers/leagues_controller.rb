@@ -14,6 +14,8 @@ class LeaguesController < ApplicationController
   # GET /leagues/1.json
   def show
     @league = League.find(params[:id])
+    @teams =  Team.where(:league_id => @league.id)
+    @team = Team.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -40,7 +42,7 @@ class LeaguesController < ApplicationController
   # POST /leagues
   # POST /leagues.json
   def create
-    @league = League.new(params[:League])
+    @league = League.new(params[:league])
 
     respond_to do |format|
       if @league.save
@@ -59,7 +61,7 @@ class LeaguesController < ApplicationController
     @league = League.find(params[:id])
 
     respond_to do |format|
-      if @league.update_attributes(params[:League])
+      if @league.update_attributes(params[:league])
         format.html { redirect_to @league, notice: 'League was successfully updated.' }
         format.json { head :no_content }
       else

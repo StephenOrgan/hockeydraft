@@ -1,10 +1,10 @@
 <%= form_for(@league) do |f| %>
-<% if @tweet.errors.any? %>
+<% if @league.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@tweet.errors.count, "error") %> prohibited this tweet from being saved:</h2>
+      <h2><%= pluralize(@league.errors.count, "error") %> prohibited this league from being saved:</h2>
 
       <ul>
-      <% @tweet.errors.full_messages.each do |msg| %>
+      <% @league.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -16,6 +16,8 @@
   </div>
 
   <div class="actions">
+
     <%= f.submit %>
   </div>
+  
 <% end %>
