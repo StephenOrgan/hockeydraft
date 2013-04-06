@@ -1,44 +1,50 @@
 <% if user_signed_in? %>
-<h1><%= @team.name %> Draft</h1>
+<div class="containter-fluid">
+  <div class="row-fluid" id="pageHeader">
+    <div class="span11" style="height:750px; background-color:white; color:black; padding-top:20px; padding-left: 50px">
+        <h1><%= @team.name %> Draft</h1>
 
 
-<%= link_to("All Forwards", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'F')))%><br>
-<%= link_to("All Defensemen", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'D')))%>
+        <%= link_to("All Forwards", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'F')))%><br>
+        <%= link_to("All Defensemen", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'D')))%>
 
 
-<table>
-  <tr>
-    <td style = "background-color:#000000; color:#FFFFFF"><b>Player</b></td>
-    <td style = "background-color:#000000; color:#FFFFFF"><b>Position</b></td>
-    <td style = "background-color:#000000; color:#FFFFFF"><b>Team</b> </th>
-    <td style = "background-color:#000000; color:#FFFFFF"><b>GP</b>&nbsp; </td>
-    <td style = "background-color:#000000; color:#FFFFFF"><b>G</b>&nbsp;&nbsp; </td>
-    <td style = "background-color:#000000; color:#FFFFFF"><b>A</b>&nbsp;&nbsp; </th>
-    <td style = "background-color:#000000; color:#FFFFFF"><b>P</b>&nbsp;&nbsp; </th>
-    <td style = "background-color:#000000; color:#FFFFFF"><b>GWG</b></th>
-    <td style = "background-color:#000000; color:#FFFFFF"><b>Draft Result</b></th>
-  </tr>
+        <table class="table table-striped">
+          <tr>
+            <th><b>Player</b></td>
+            <th><b>Position</b></td>
+            <th><b>Team</b> </th>
+            <th><b>GP</b>&nbsp; </td>
+            <th><b>G</b>&nbsp;&nbsp; </td>
+            <th><b>A</b>&nbsp;&nbsp; </th>
+            <th><b>P</b>&nbsp;&nbsp; </th>
+            <th><b>GWG</b></th>
+            <th><b>Draft Result</b></th>
+          </tr>
 
-<% @players.each do |player| %>
-  <tr>
-    <td style = "background-color:#E6E8FA"><%= player.name %></td>
-    <td style = "background-color:#E6E8FA"><%= player.position %></td>
-    <td style = "background-color:#E6E8FA"><%= player.team %></td>
-    <td style = "background-color:#E6E8FA"><%= player.gp %></td>
-    <td style = "background-color:#E6E8FA"><%= player.goals %></td>
-    <td style = "background-color:#E6E8FA"><%= player.assists %></td>
-    <td style = "background-color:#CDCDCD"><b><%= player.points %></b></td>
-    <td style = "background-color:#E6E8FA"><%= player.gwg %></td>
-    <td style = "background-color:#E6E8FA"><% if show_draftteam(player, @league.id) %>
-        <%= player.picks.first.team.name %>
-      <% end %></td>
-    <td> <% if show_button(player, @league.id) %>
-           <%= link_to("Draft Player", '/picks/new?league_id='  + @league.id.to_s + '&team_id=' + @team.id.to_s + '&player_id=' + player.id.to_s) %>
-      <% end %> </td>
+        <% @players.each do |player| %>
+          <tr>
+            <td><%= player.name %></td>
+            <td><%= player.position %></td>
+            <td><%= player.team %></td>
+            <td><%= player.gp %></td>
+            <td><%= player.goals %></td>
+            <td><%= player.assists %></td>
+            <td style = "background-color:#CDCDCD"><b><%= player.points %></b></td>
+            <td><%= player.gwg %></td>
+            <td><% if show_draftteam(player, @league.id) %>
+                <%= player.picks.first.team.name %>
+              <% end %></td>
+            <td> <% if show_button(player, @league.id) %>
+                   <%= link_to("Draft Player", '/picks/new?league_id='  + @league.id.to_s + '&team_id=' + @team.id.to_s + '&player_id=' + player.id.to_s) %>
+              <% end %> </td>
 
-  </tr>
-<% end %>
-</table>
+          </tr>
+        <% end %>
+        </table>
 
-<br />
+        <br />
+      </div>
+  </div>
+</div>
 <% end %>
