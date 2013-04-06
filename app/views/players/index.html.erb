@@ -1,0 +1,42 @@
+<h1><%= @team.name %> Draft</h1>
+
+
+<%= link_to("All Forwards", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'F')))%><br>
+<%= link_to("All Defensemen", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'D')))%>
+
+
+<table>
+  <tr>
+    <td style = "background-color:#000000; color:#FFFFFF"><b>Player</b></td>
+    <td style = "background-color:#000000; color:#FFFFFF"><b>Position</b></td>
+    <td style = "background-color:#000000; color:#FFFFFF"><b>Team</b> </th>
+    <td style = "background-color:#000000; color:#FFFFFF"><b>GP</b>&nbsp; </td>
+    <td style = "background-color:#000000; color:#FFFFFF"><b>G</b>&nbsp;&nbsp; </td>
+    <td style = "background-color:#000000; color:#FFFFFF"><b>A</b>&nbsp;&nbsp; </th>
+    <td style = "background-color:#000000; color:#FFFFFF"><b>P</b>&nbsp;&nbsp; </th>
+    <td style = "background-color:#000000; color:#FFFFFF"><b>GWG</b></th>
+    <td style = "background-color:#000000; color:#FFFFFF"><b>Draft Result</b></th>
+  </tr>
+
+<% @players.each do |player| %>
+  <tr>
+    <td style = "background-color:#E6E8FA"><%= player.name %></td>
+    <td style = "background-color:#E6E8FA"><%= player.position %></td>
+    <td style = "background-color:#E6E8FA"><%= player.team %></td>
+    <td style = "background-color:#E6E8FA"><%= player.gp %></td>
+    <td style = "background-color:#E6E8FA"><%= player.goals %></td>
+    <td style = "background-color:#E6E8FA"><%= player.assists %></td>
+    <td style = "background-color:#CDCDCD"><b><%= player.points %></b></td>
+    <td style = "background-color:#E6E8FA"><%= player.gwg %></td>
+    <td style = "background-color:#E6E8FA"><% if show_draftteam(player, @league.id) %>
+        <%= player.picks.first.team.name %>
+      <% end %></td>
+    <td> <% if show_button(player, @league.id) %>
+           <%= link_to("Draft Player", '/picks/new?league_id='  + @league.id.to_s + '&team_id=' + @team.id.to_s + '&player_id=' + player.id.to_s) %>
+      <% end %> </td>
+
+  </tr>
+<% end %>
+</table>
+
+<br />

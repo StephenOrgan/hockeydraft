@@ -1,0 +1,10 @@
+<%= form_for(@pick) do |f| %>
+           <%= f.hidden_field :league_id, :value => @league.id %>
+           <%= f.hidden_field :team_id, :value => @team.id %>
+           <%= f.hidden_field :player_id, :value => @player.id %>
+           <%= f.submit %>
+  
+<% end %>
+
+
+					

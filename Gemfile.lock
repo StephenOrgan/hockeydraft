@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/ernie/ransack.git
+  revision: faf299429ea2965d4419d59fc33ad0ed07909340
+  specs:
+    ransack (0.7.3)
+      actionpack (~> 3.0)
+      activerecord (~> 3.0)
+      polyamorous (~> 0.5.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -68,6 +77,8 @@ GEM
     nokogiri (1.5.6)
     ntlm-http (0.1.1)
     pg (0.14.1)
+    polyamorous (0.5.0)
+      activerecord (~> 3.0)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -129,6 +140,7 @@ DEPENDENCIES
   nokogiri
   pg
   rails (= 3.2.11)
+  ransack!
   sass-rails (~> 3.2.3)
   sqlite3
   uglifier (>= 1.0.3)

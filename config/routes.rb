@@ -10,6 +10,8 @@ Hockeydraft::Application.routes.draw do
 
 resources :teams
 resources :leagues
+resources :players
+resources :picks
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
