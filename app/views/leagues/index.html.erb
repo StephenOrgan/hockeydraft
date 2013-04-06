@@ -1,3 +1,4 @@
+<% if user_signed_in? %>
 <h1>Leagues</h1>
 
 <table>
@@ -23,3 +24,5 @@
 <br />
 
 <%= link_to 'New League', new_league_path %>
+
+<% end %>

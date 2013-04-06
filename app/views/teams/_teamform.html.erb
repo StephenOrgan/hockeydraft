@@ -18,7 +18,7 @@
   <div class="field">
     <%= f.label :league_id %><br />
     <%= f.select :league_id, League.all.map{|u| [u.name, u.id]} %>
-
+    <%= f.hidden_field :user_id, :value => current_user.id %>
   </div>
   <p>&nbsp;</p>
 

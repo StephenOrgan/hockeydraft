@@ -1,5 +1,9 @@
 Hockeydraft::Application.routes.draw do
   
+  match 'user' => 'user#index'
+  
+  devise_for :users
+
   get "teams/new"
 
   get "teams/create"
@@ -12,6 +16,8 @@ resources :teams
 resources :leagues
 resources :players
 resources :picks
+
+root :to => 'leagues#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

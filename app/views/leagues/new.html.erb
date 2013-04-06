@@ -1,5 +1,8 @@
+<% if user_signed_in? %>
 <h1>Leagues#new</h1>
 
 <%= render 'form2' %>
 
 <%= link_to 'Go back', leagues_path %>
+
+<% end %>

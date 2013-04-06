@@ -31,6 +31,8 @@ gem 'nokogiri'
 
 gem 'mechanize'
 
+gem 'devise'
+
 gem "ransack", :git => "git://github.com/ernie/ransack.git" # Track git repo
 
 # To use ActiveModel has_secure_password

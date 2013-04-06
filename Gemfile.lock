@@ -38,6 +38,7 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     arel (3.0.2)
+    bcrypt-ruby (3.0.1)
     builder (3.0.4)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -46,6 +47,11 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.5.0)
+    devise (2.2.3)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (~> 3.1)
+      warden (~> 1.2.1)
     domain_name (0.5.7)
       unf (~> 0.0.3)
     erubis (2.7.0)
@@ -76,6 +82,7 @@ GEM
     net-http-persistent (2.8)
     nokogiri (1.5.6)
     ntlm-http (0.1.1)
+    orm_adapter (0.4.0)
     pg (0.14.1)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
@@ -128,6 +135,8 @@ GEM
     unf (0.0.5)
       unf_ext
     unf_ext (0.0.6)
+    warden (1.2.1)
+      rack (>= 1.0)
     webrobots (0.1.0)
 
 PLATFORMS
@@ -135,6 +144,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
+  devise
   jquery-rails
   mechanize
   nokogiri

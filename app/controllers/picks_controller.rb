@@ -18,7 +18,7 @@ class PicksController < ApplicationController
 
     respond_to do |format|
       if @pick.save
-        format.html { redirect_to players_path(params.merge(:league_id => @pick.league_id, :team_id => @pick.team_id)), notice: 'League was successfully created.' }
+        format.html { redirect_to players_path(params.merge(:league_id => @pick.league_id, :team_id => @pick.team_id)), notice: 'Pick was successfully created.' }
         format.json { render json: @pick, status: :created, location: @pick }
       else
         format.html { render action: "new" }

@@ -1,6 +1,11 @@
+
+<% if user_signed_in? %>
 <h1>Teams#new</h1>
 
 <%= render 'teamform' %>
 <p>&nbsp;</p>
 
 <%= link_to 'Go back', teams_path %>
+
+
+<% end %>
