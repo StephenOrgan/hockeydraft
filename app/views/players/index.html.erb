@@ -4,9 +4,13 @@
     <div class="span11" style="height:750px; background-color:white; color:black; padding-top:20px; padding-left: 50px">
         <h1><%= @team.name %> Draft</h1>
 
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
-        <%= link_to("All Forwards", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'F')))%><br>
-        <%= link_to("All Defensemen", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'D')))%>
+
+<%= link_to("Players", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'all')), :class => 'btn btn-primary') %>
+<%= link_to("Forwards", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'F')), :class => 'btn btn-primary')%>
+<%= link_to("Defensemen", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'D')), :class => 'btn btn-primary')%><br><br>
 
 
         <table class="table table-striped">
@@ -20,6 +24,7 @@
             <th><b>P</b>&nbsp;&nbsp; </th>
             <th><b>GWG</b></th>
             <th><b>Draft Result</b></th>
+            <th></th>
           </tr>
 
         <% @players.each do |player| %>
@@ -36,7 +41,7 @@
                 <%= player.picks.first.team.name %>
               <% end %></td>
             <td> <% if show_button(player, @league.id) %>
-                   <%= link_to("Draft Player", '/picks/new?league_id='  + @league.id.to_s + '&team_id=' + @team.id.to_s + '&player_id=' + player.id.to_s) %>
+                   <%= link_to("Draft Player", '/picks/new?league_id='  + @league.id.to_s + '&team_id=' + @team.id.to_s + '&player_id=' + player.id.to_s, :class => 'btn btn-success') %>
               <% end %> </td>
 
           </tr>
@@ -47,4 +52,6 @@
       </div>
   </div>
 </div>
+<% else %>
+<%= render 'signinform' %>
 <% end %>

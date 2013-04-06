@@ -2,8 +2,9 @@
            <%= f.hidden_field :league_id, :value => @league.id %>
            <%= f.hidden_field :team_id, :value => @team.id %>
            <%= f.hidden_field :player_id, :value => @player.id %>
-           <%= f.submit %>
-  
+           <div style="padding-top: 20px">
+           <%= f.submit 'Add player to my team', :class => 'btn btn-success' %> <%= link_to 'Go back', players_path(params.merge(:league_id => @league.id, :team_id => @team.id)), :class => 'btn' %>
+  				</div>
 <% end %>
 
 

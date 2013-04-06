@@ -7,23 +7,26 @@ class PlayersController < ApplicationController
 		@takenpicks = Pick.where(:league_id=> @league)
 		#@teampicks = player.picks.first.team.name
 		@pick = Pick.new league_id: params[:league_id]
-  
+    @user = User.new
 
-		if params[:position]=='F'
-			@players = Player.where("position = 'C' OR position = 'L' or position = 'R'")
-		else
-			if params[:position]=='D'
-				@players = Player.where("position = 'D'")
+    if params[:position]=='all'
+    	@players = Player.all
+    	else
+				if params[:position]=='F'
+						@players = Player.where("position = 'C' OR position = 'L' or position = 'R'")
 				else
-					@players = Player.all
-			
-					respond_to do |format|
-				  format.html # index.html.erb
-				  format.json { render json: @player }
-
+					if params[:position]=='D'
+						@players = Player.where("position = 'D'")
+						else
+							@players = Player.all
+					
+							respond_to do |format|
+						  format.html # index.html.erb
+						  format.json { render json: @player }
+						end
 				  end
     	end
-    end
+    	end
   end
 
 	def new
