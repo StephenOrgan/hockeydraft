@@ -8,4 +8,11 @@ class Team < ActiveRecord::Base
 
   validates :name, presence: true
   validates :league, presence: true
+
+	# def owner_of?(team_id)
+	 #  team.find do |t| 
+   #	t.user_id == current_user.id
+   	# end
+  # end
+
 end

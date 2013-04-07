@@ -10,11 +10,23 @@
 
 <%= link_to("Players", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'all')), :class => 'btn btn-primary') %>
 <%= link_to("Forwards", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'F')), :class => 'btn btn-primary')%>
-<%= link_to("Defensemen", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'D')), :class => 'btn btn-primary')%><br><br>
+<%= link_to("Defensemen", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'D')), :class => 'btn btn-primary')%>
+<%= link_to("Goalies", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'G')), :class => 'btn btn-primary')%><br><br>
 
 
         <table class="table table-striped">
           <tr>
+            <% if params[:position]=='G'%>
+            <th><b>Player</b></td>
+            <th><b>Position</b></td>
+            <th><b>Team</b> </th>
+            <th><b>GP</b>&nbsp; </td>
+            <th><b>W</b>&nbsp;&nbsp; </td>
+            <th><b>L</b>&nbsp;&nbsp; </th>
+            <th><b>OT</b>&nbsp;&nbsp; </th>
+            <th><b>SO</b></th>
+            
+            <% else %>
             <th><b>Player</b></td>
             <th><b>Position</b></td>
             <th><b>Team</b> </th>
@@ -23,13 +35,24 @@
             <th><b>A</b>&nbsp;&nbsp; </th>
             <th><b>P</b>&nbsp;&nbsp; </th>
             <th><b>GWG</b></th>
+            <% end %>
             <th><b>Draft Result</b></th>
             <th></th>
           </tr>
 
         <% @players.each do |player| %>
           <tr>
-            <td><%= player.name %></td>
+             <% if params[:position]=='G'%>
+             <td><%= player.name %></td>
+            <td><%= player.position %></td>
+            <td><%= player.team %></td>
+            <td><%= player.gp %></td>
+            <td style = "background-color:#CDCDCD"><b><%= player.wins %></td>
+            <td><%= player.losses %></td>
+            <td><%= player.ot %></td>
+            <td><%= player.shutouts %></td>
+             <% else %>
+             <td><%= player.name %></td>
             <td><%= player.position %></td>
             <td><%= player.team %></td>
             <td><%= player.gp %></td>
@@ -37,7 +60,10 @@
             <td><%= player.assists %></td>
             <td style = "background-color:#CDCDCD"><b><%= player.points %></b></td>
             <td><%= player.gwg %></td>
-            <td><% if show_draftteam(player, @league.id) %>
+            <td>
+             <% end %>
+
+            <% if show_draftteam(player, @league.id) %>
                 <%= player.picks.first.team.name %>
               <% end %></td>
             <td> <% if show_button(player, @league.id) %>

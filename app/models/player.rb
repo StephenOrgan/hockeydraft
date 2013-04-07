@@ -1,5 +1,5 @@
 class Player < ActiveRecord::Base
-  attr_accessible :assists, :goals, :name, :player_id, :points, :position, :shutouts, :string, :wins, :team, :gwg, :gp
+  attr_accessible :assists, :goals, :name, :player_id, :points, :position, :shutouts, :string, :wins, :team, :gwg, :gp, :losses, :ot
 
   
   #has_many :users, through: :picks

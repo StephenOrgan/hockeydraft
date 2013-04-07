@@ -3,11 +3,11 @@ require 'nokogiri'
 require 'mechanize'
 require 'open-uri'
 
-class NhlScrape
+class NhlScrapeGoalies
 
-  #URL = "http://www.nhl.com/ice/playerstats.htm?viewName=summary&season=20112012&sort=points&pg="
+  URL = "http://www.nhl.com/ice/playerstats.htm?season=20112012&gameType=2&team=&position=G&viewName=summary&pg="
 
-URL = "http://www.nhl.com/ice/playerstats.htm?season=20112012&gameType=2&team=&position=G&viewName=summary&pg="
+
 
   attr_reader :player_count, :pages, :season, :datestamp
 
@@ -47,7 +47,6 @@ URL = "http://www.nhl.com/ice/playerstats.htm?season=20112012&gameType=2&team=&p
   end
 
   def parse_all
-    #File.open("cache/#{season}/playerstats.csv", 'w') do |f|
     File.open("cache/#{season}/goaliestats.csv", 'w') do |f|
       (1..pages).each do |pg|
         f << parse_page(pg)
@@ -59,7 +58,6 @@ URL = "http://www.nhl.com/ice/playerstats.htm?season=20112012&gameType=2&team=&p
   def parse_page(number=1)
     #download_page(number) unless File.exists?("cache/#{season}/html/#{datestamp}-#{number}.html")
     #file = File.read("cache/#{season}/html/#{datestamp}-#{number}.html")
-    #html = Nokogiri::HTML(open("http://www.nhl.com/ice/playerstats.htm?viewName=summary&season=20112012&sort=points&pg=#{number}"))
     html = Nokogiri::HTML(open("http://www.nhl.com/ice/playerstats.htm?season=20112012&gameType=2&team=&position=G&viewName=summary&pg=#{number}"))
     table = html.css('table.data.stats tbody tr')
     players = []

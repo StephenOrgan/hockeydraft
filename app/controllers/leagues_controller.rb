@@ -16,6 +16,7 @@ class LeaguesController < ApplicationController
     @league = League.find(params[:id])
     @teams =  Team.where(:league_id => @league.id)
     @team = Team.new
+    @commiss = User.find(@league.user_id)
 
     respond_to do |format|
       format.html # show.html.erb

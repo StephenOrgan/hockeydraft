@@ -3,23 +3,45 @@
   <div class="row-fluid" id="pageHeader">
     <div class="span12" style="height:750px; background-color:white; color:black; padding-top:20px; padding-left: 20px">
       <h1> <%= @league.name %> 
-        League <%= link_to 'Join this League', '/teams/new?league_id='  + @league.id.to_s, :class => 'btn btn-primary' %></h1>
+        League 
+
+        <% if @league.status.blank? %>
+         <%= link_to 'Join this League', '/teams/new?league_id='  + @league.id.to_s, :class => 'btn btn-primary' %>
+          <% end %>
+          </h1>  
+
+           
+            <% if ((current_user.id == @league.user_id) && (@league.status.blank?)) %>
+              <div style="padding-top: 30px;">
+              <%= form_for@league, :method => :put do |f| %>
+              <%= f.hidden_field :status, :value => 'draft_started' %>
+              <%= f.submit 'Start Draft', :class => 'btn btn-danger' %>(only you can start this)
+              </div>
+              <% end %>
+            <% end %>
+        
+
+        <div class="alert alert-info">
+          Commissioner: <%= @commiss.email %>
+        </div>
 
       <table class="table table-striped">
         <tr>
           <th>Teams</th>
-          <th></th>
-          <th></th>
+          <th>Actions</th>
           <th></th>
         </tr>
 
       <% @teams.each do |team| %>
         <tr>
-          <td><%= team.name %></td>
-           
-          
-          <td><%= link_to 'Show Picks', team %></td>
-          <td><%= link_to 'Draft', players_path(params.merge(:league_id => @league.id, :team_id => team)), :class => 'btn btn-success' %></td>
+          <td><%= link_to team.name, team %></td>
+        
+          <td><% if @league.status == 'draft_started' %>
+
+            <%= link_to 'Draft', players_path(params.merge(:league_id => @league.id, :team_id => team)), :class => 'btn btn-success' %>
+            <% end %>
+
+          </td>
       <td>
         </tr>
 

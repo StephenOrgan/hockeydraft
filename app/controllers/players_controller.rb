@@ -10,23 +10,28 @@ class PlayersController < ApplicationController
     @user = User.new
 
     if params[:position]=='all'
-    	@players = Player.all
+    	@players = Player.where("position = 'C' OR position = 'L' OR position = 'R' OR position = 'D'")
     	else
-				if params[:position]=='F'
-						@players = Player.where("position = 'C' OR position = 'L' or position = 'R'")
-				else
-					if params[:position]=='D'
-						@players = Player.where("position = 'D'")
-						else
-							@players = Player.all
-					
-							respond_to do |format|
-						  format.html # index.html.erb
-						  format.json { render json: @player }
-						end
-				  end
-    	end
-    	end
+				if params[:position]=='G'
+						@players = Player.where("position = 'G'")
+
+			    	else
+							if params[:position]=='F'
+									@players = Player.where("position = 'C' OR position = 'L' or position = 'R'")
+							else
+								if params[:position]=='D'
+									@players = Player.where("position = 'D'")
+									else
+										@players = Player.all
+								
+										respond_to do |format|
+									  format.html # index.html.erb
+									  format.json { render json: @player }
+								end
+							end
+				end
+    end
+    end
   end
 
 	def new
@@ -49,10 +54,19 @@ class PlayersController < ApplicationController
 
   private
 
+  # i will need to add if user is owner of team to show the draftbutton and if team status is ready to pick
+ 
+ # def show_button(player, league_id, team_id)
+ # 	player.taken_for?(league_id) | team.owerner_of?(team_id) | team.status = 'ready_to_pick' ? false : true
+ # end
+ # helper_method :show_button
+
+
   def show_button(player, league_id)
   	player.taken_for?(league_id) ? false : true
   end
   helper_method :show_button
+
 
   def show_draftteam(player, league_id)
   	player.taken_for?(league_id) ? true : false

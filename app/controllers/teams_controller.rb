@@ -23,6 +23,7 @@ class TeamsController < ApplicationController
   # GET /leagues/new.json
   def new
     @team = Team.new league_id: params[:league_id]
+    @league = League.find(params[:league_id])
     
     respond_to do |format|
       format.html # new.html.erb
