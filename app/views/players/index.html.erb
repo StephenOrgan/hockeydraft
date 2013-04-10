@@ -64,10 +64,13 @@
              <% end %>
 
             <% if show_draftteam(player, @league.id) %>
-                <%= player.picks.first.team.name %>
+                <%= @taken %>
               <% end %></td>
-            <td> <% if show_button(player, @league.id) %>
+            <td> 
+              <% if @team.status == 'ready_to_pick' %>
+              <% if show_button(player, @league.id) %>
                    <%= link_to("Draft Player", '/picks/new?league_id='  + @league.id.to_s + '&team_id=' + @team.id.to_s + '&player_id=' + player.id.to_s, :class => 'btn btn-success') %>
+              <% end %>
               <% end %> </td>
 
           </tr>

@@ -9,9 +9,9 @@ class Player < ActiveRecord::Base
   validates :player_id, uniqueness: true
 
   def taken_for?(league_id)
-		picks.find do |p| 
+		  picks.find do |p| 
     	p.league_id == league_id
-   	end
+    end
   end
 
 end

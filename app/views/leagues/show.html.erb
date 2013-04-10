@@ -5,13 +5,13 @@
       <h1> <%= @league.name %> 
         League 
 
-        <% if @league.status.blank? %>
+        <% if @league.status == 'not_started' %>
          <%= link_to 'Join this League', '/teams/new?league_id='  + @league.id.to_s, :class => 'btn btn-primary' %>
           <% end %>
           </h1>  
 
            
-            <% if ((current_user.id == @league.user_id) && (@league.status.blank?)) %>
+            <% if ((current_user.id == @league.user_id) && (@league.status == 'not_started')) %>
               <div style="padding-top: 30px;">
               <%= form_for@league, :method => :put do |f| %>
               <%= f.hidden_field :status, :value => 'draft_started' %>
@@ -36,9 +36,14 @@
         <tr>
           <td><%= link_to team.name, team %></td>
         
-          <td><% if @league.status == 'draft_started' %>
+          <td>
+            <% if current_user.id == team.user_id %>
+            <% if @league.status == 'draft_started' %>
+
 
             <%= link_to 'Draft', players_path(params.merge(:league_id => @league.id, :team_id => team)), :class => 'btn btn-success' %>
+          
+            <% end %>
             <% end %>
 
           </td>

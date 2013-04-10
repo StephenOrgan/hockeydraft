@@ -7,4 +7,34 @@ class League < ActiveRecord::Base
 
   validates :name, presence: true
 
+	before_save :assign_draft_order
+
+	state_machine :status, initial: :not_started do
+		after_transition any => :draft_started, :do => :assign_draft_order
+
+		event :start_draft do
+			transition :not_started => :draft_started
+		end
+	end
+
+	def assign_draft_order
+		if status == 'draft_started' 
+			
+				teams.each { |n| n.update_attribute(:draftrank, 0) }
+			
+
+				i = 1
+				teams.order("RANDOM()").each do |team|
+				team.update_attributes(:draftrank => i, :direction => 'down') 
+				i = i + 1
+			end
+			t = teams.where(:draftrank => 1)
+			t.first.update_attributes(:status => 'ready_to_pick')
+		end
+	end
+
 end
+
+#until i == Team.count(:conditions => ["league_id = ?", league.id]) + 1
+#teams.update_all draftrank: 0
+#teams = Team.where(:league_id => league.id)

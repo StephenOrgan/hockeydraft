@@ -27,6 +27,8 @@ end
 
 gem 'jquery-rails'
 
+gem 'state_machine'
+
 gem 'nokogiri'
 
 gem 'mechanize'

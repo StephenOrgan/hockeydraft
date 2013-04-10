@@ -5,9 +5,13 @@ class PlayersController < ApplicationController
 		@league = League.find(params[:league_id])
 		@team = Team.find(params[:team_id])
 		@takenpicks = Pick.where(:league_id=> @league)
-		#@teampicks = player.picks.first.team.name
 		@pick = Pick.new league_id: params[:league_id]
-    @user = User.new
+		@picks = Pick.where(league_id: params[:league_id])
+		@taken = 'NOT AVAILABLE'
+		#Pick.find(:all, :conditions => { :league_id => params[:league_id] })
+		#@takenteam = 
+		#@playerpicks = Player.where(:id == Pick.player_id)
+
 
     if params[:position]=='all'
     	@players = Player.where("position = 'C' OR position = 'L' OR position = 'R' OR position = 'D'")

@@ -1,5 +1,5 @@
 class Team < ActiveRecord::Base
-  attr_accessible :integer, :name, :team_id, :league_id, :user_id
+  attr_accessible :integer, :direction, :name, :team_id, :league_id, :user_id, :draftrank, :status
 
   #has_many :players through: :picks
   has_many :picks

@@ -8,6 +8,46 @@ class Pick < ActiveRecord::Base
 	validates :team, presence: true
 	validates :league, presence: true
 	validates :player, presence: true
+
+
+
+	after_save :after_pick_created
+
+	# def taken_for?(player, league_id)
+	# 	  players.find do |p| 
+ #    	p.league_id == league_id
+ #    end
+ #  end
+
+	def after_pick_created
+		teams = Team.where(:league_id => league_id)
+		nextteamup = teams.where(:draftrank => team.draftrank - 1)
+		nextteamdown = teams.where(:draftrank => team.draftrank + 1)
+
+		if (team.direction == 'down')
+			if nextteamdown.blank?
+				team.update_attributes(:direction => 'up')
+			else
+				if nextteamdown.first.draftrank > 0
+					team.update_attributes(:status => 'not_ready_to_pick')
+					nextteamdown.first.update_attributes(:direction =>'down')
+					nextteamdown.first.update_attributes(:status => 'ready_to_pick') 
+				end
+			end
+		else
+			if (team.direction == 'up')
+				if nextteamup.blank?
+					team.update_attributes(:direction =>'down')
+				else
+					if nextteamup.first.draftrank > 0
+							team.update_attributes(:status => 'not_ready_to_pick')
+							nextteamup.first.update_attributes(:direction => 'up')
+							nextteamup.first.update_attributes(:status => 'ready_to_pick')
+					end
+				end
+			end
+		end
+	end
 end
 
 
