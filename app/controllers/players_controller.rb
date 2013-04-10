@@ -77,4 +77,10 @@ class PlayersController < ApplicationController
   end
   helper_method :show_draftteam
 
+
+	def show_draftteam2(player, league_id)
+   Pick.find(:first, :conditions => { :league_id => league_id, :player_id => player }).team.name
+
+  end
+  helper_method :show_draftteam2
 end

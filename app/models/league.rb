@@ -1,7 +1,8 @@
 class League < ActiveRecord::Base
   attr_accessible :name, :commissioner_id, :user_id, :status
   has_many :teams
-
+  has_many :picks
+  has_many :players, :through => :picks
 	belongs_to :user
   belongs_to :commissioner, class_name: 'User'
 

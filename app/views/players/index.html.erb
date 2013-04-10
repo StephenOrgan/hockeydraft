@@ -64,7 +64,7 @@
              <% end %>
 
             <% if show_draftteam(player, @league.id) %>
-                <%= @taken %>
+                <%= show_draftteam2(player, @league.id) %>
               <% end %></td>
             <td> 
               <% if @team.status == 'ready_to_pick' %>
