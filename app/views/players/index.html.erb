@@ -37,7 +37,7 @@
             <th><b>GWG</b></th>
             <% end %>
             <th><b>Draft Result</b></th>
-            <th></th>
+           
           </tr>
 
         <% @players.each do |player| %>
@@ -65,13 +65,23 @@
 
             <% if show_draftteam(player, @league.id) %>
                 <%= show_draftteam2(player, @league.id) %>
-              <% end %></td>
-            <td> 
+               <% else %>
+                  <% if @team.status == 'ready_to_pick' %>
+                    <% if show_button(player, @league.id) %>
+                        <%= link_to("Draft Player", '/picks/new?league_id='  + @league.id.to_s + '&team_id=' + @team.id.to_s + '&player_id=' + player.id.to_s, :class => 'btn btn-success') %>
+
+                    <% end %>
+                    <% else %>
+                    Available, but not your turn
+                  <% end %>
+
+            <% end %></td>
+            <!-- <td> 
               <% if @team.status == 'ready_to_pick' %>
               <% if show_button(player, @league.id) %>
                    <%= link_to("Draft Player", '/picks/new?league_id='  + @league.id.to_s + '&team_id=' + @team.id.to_s + '&player_id=' + player.id.to_s, :class => 'btn btn-success') %>
               <% end %>
-              <% end %> </td>
+              <% end %> </td> -->
 
           </tr>
         <% end %>
