@@ -11,8 +11,10 @@ Hockeydraft::Application.configure do
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
+  #config.action_view.debug_rjs             = true
   config.action_controller.perform_caching = false
 
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
 
@@ -34,4 +36,10 @@ Hockeydraft::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  require 'pusher'
+  Pusher.logger = Rails.logger
+  Pusher.app_id = 41538
+  Pusher.key = '221f87b0aba422a3df7e'
+  Pusher.secret = 'c532ad6c85d433ff70c7'
 end

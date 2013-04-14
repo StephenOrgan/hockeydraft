@@ -6,8 +6,35 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet" media="screen">
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="http://js.pusher.com/2.0/pusher.min.js"></script>
+  // <script type="text/javascript">
+  //   // Enable pusher logging - don't include this in production
+  //   Pusher.log = function(message) {
+  //     if (window.console && window.console.log) window.console.log(message);
+  //   };
+
+  //   // Flash fallback logging - don't include this in production
+  //   WEB_SOCKET_DEBUG = true;
+
+  //   var pusher = new Pusher('221f87b0aba422a3df7e');
+  //   var channel = pusher.subscribe('test_channel');
+  //   channel.bind('my_event', function(data) {
+  //     alert(data);
+  //   });
+  // </script>
+
 </head>
 <body>
+
+  <% if signed_in? %>
+  
+  
+  <div id="status"></div>
+  
+  <div id="notify_api"><button type="button" id="ask_notify_permission">Enable Webkit Notifications</button></div>
+  <% end %>
+
 <!-- Obtain latest version of jquery automatically -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <!-- Obtain Bootstrap javascript from CDN (online service) so it doesn't have to be on my machine -->
@@ -22,6 +49,8 @@
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 <%= yield %>
+
+
 
 </body>
 </html>

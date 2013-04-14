@@ -26,23 +26,27 @@ class Pick < ActiveRecord::Base
 
 		if (team.direction == 'down')
 			if nextteamdown.blank?
-				team.update_attributes(:direction => 'up')
+				 team.update_attributes(:direction => 'up')
+				 Pusher['private-'+league_id.to_s].trigger('new_message', {:from => 'league_name', :subject => team.name + 'has selected ' + player.name + '. ' + team.name + ' gets to select again'})
 			else
 				if nextteamdown.first.draftrank > 0
 					team.update_attributes(:status => 'not_ready_to_pick')
 					nextteamdown.first.update_attributes(:direction =>'down')
-					nextteamdown.first.update_attributes(:status => 'ready_to_pick') 
+					nextteamdown.first.update_attributes(:status => 'ready_to_pick')
+					Pusher['private-'+league_id.to_s].trigger('new_message', {:from => 'league_name', :subject => team.name + 'has selected ' + player.name + '. ' + nextteamdown.first.name + ' is next up'})
 				end
 			end
 		else
 			if (team.direction == 'up')
 				if nextteamup.blank?
 					team.update_attributes(:direction =>'down')
+					Pusher['private-'+league_id.to_s].trigger('new_message', {:from => 'league_name', :subject => team.name + 'has selected ' + player.name + '. ' + team.name + ' gets to select again'})
 				else
 					if nextteamup.first.draftrank > 0
 							team.update_attributes(:status => 'not_ready_to_pick')
 							nextteamup.first.update_attributes(:direction => 'up')
 							nextteamup.first.update_attributes(:status => 'ready_to_pick')
+							Pusher['private-'+league_id.to_s].trigger('new_message', {:from => 'league_name', :subject => team.name + 'has selected ' + player.name + '. ' + nextteamup.first.name + ' is next up'})
 					end
 				end
 			end

@@ -17,6 +17,8 @@ resources :leagues
 resources :players
 resources :picks
 
+post 'pusher/auth'
+
 root :to => 'leagues#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.

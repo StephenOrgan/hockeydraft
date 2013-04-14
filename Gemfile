@@ -31,6 +31,8 @@ gem 'state_machine'
 
 gem 'nokogiri'
 
+gem 'pusher'
+
 gem 'mechanize'
 
 gem 'devise'
