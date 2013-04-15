@@ -3,12 +3,19 @@
   <div class="row-fluid" id="pageHeader">
     <div class="span12" style="height:750px; background-color:white; color:black; padding-top:20px; padding-left: 20px">
       <h1> <%= @league.name %> 
-        League 
+         </h1> 
 
         <% if @league.status == 'not_started' %>
-         <%= link_to 'Join this League', '/teams/new?league_id='  + @league.id.to_s, :class => 'btn btn-primary' %>
+         <% if current_user.teams.where(:league_id => @league.id).blank? %>
+            <%= link_to 'Join this League', '/teams/new?league_id='  + @league.id.to_s, :class => 'btn btn-primary' %>
+          <% else %>
+            <div class="alert alert-success span4">
+            <span style="color: green; font-size: 25pt;">✓</span> &nbsp;&nbsp;&nbsp;You are a member of this League
+            </div>
           <% end %>
-          </h1>  
+        <% end %>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
 
            
             <% if ((current_user.id == @league.user_id) && (@league.status == 'not_started')) %>
@@ -19,6 +26,7 @@
               </div>
               <% end %>
             <% end %>
+
         
 
         <div class="alert alert-info">
