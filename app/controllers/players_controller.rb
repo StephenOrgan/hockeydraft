@@ -8,6 +8,7 @@ class PlayersController < ApplicationController
 		@pick = Pick.new league_id: params[:league_id]
 		@picks = Pick.where(league_id: params[:league_id])
 		@taken = 'NOT AVAILABLE'
+		@nextteam = Team.where(league_id: params[:league_id], status: 'ready_to_pick')
 		#Pick.find(:all, :conditions => { :league_id => params[:league_id] })
 		#@takenteam = 
 		#@playerpicks = Player.where(:id == Pick.player_id)
