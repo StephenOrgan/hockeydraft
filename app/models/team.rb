@@ -5,6 +5,7 @@ class Team < ActiveRecord::Base
   has_many :picks
   belongs_to :league
   has_one :user
+  has_many :players, :through => :picks
 
   validates :name, presence: true
   validates :league, presence: true

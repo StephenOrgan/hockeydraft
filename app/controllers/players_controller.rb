@@ -4,38 +4,31 @@ class PlayersController < ApplicationController
 	def index
 		@league = League.find(params[:league_id])
 		@team = Team.find(params[:team_id])
-		@takenpicks = Pick.where(:league_id=> @league)
+		#@takenpicks = Pick.where(:league_id=> @league)
 		@pick = Pick.new league_id: params[:league_id]
-		@picks = Pick.where(league_id: params[:league_id])
-		@taken = 'NOT AVAILABLE'
+		picks = Pick.where(league_id: params[:league_id], team_id: params[:team_id])
 		@nextteam = Team.where(league_id: params[:league_id], status: 'ready_to_pick')
+		result = picks.map {|pick| pick.player.position }.each_with_object(Hash.new(0)) {|each, result| result[each] += 1 }
+
+		@resultforward = result["C"] + result["L"] + result["R"]
+		@resultdefense = result["D"]
+		@resultgoalie = result["G"]
+		
 		#Pick.find(:all, :conditions => { :league_id => params[:league_id] })
 		#@takenteam = 
 		#@playerpicks = Player.where(:id == Pick.player_id)
 
-
-    if params[:position]=='all'
+		case params[:position]
+		when 'all'
     	@players = Player.where("position = 'C' OR position = 'L' OR position = 'R' OR position = 'D'")
-    	else
-				if params[:position]=='G'
-						@players = Player.where("position = 'G'")
-
-			    	else
-							if params[:position]=='F'
-									@players = Player.where("position = 'C' OR position = 'L' or position = 'R'")
-							else
-								if params[:position]=='D'
-									@players = Player.where("position = 'D'")
-									else
-										@players = Player.all
-								
-										respond_to do |format|
-									  format.html # index.html.erb
-									  format.json { render json: @player }
-								end
-							end
-				end
-    end
+    when 'G'
+			@players = Player.where("position = 'G'")
+		when 'F'
+			@players = Player.where("position = 'C' OR position = 'L' or position = 'R'")
+		when 'D'
+			@players = Player.where("position = 'D'")
+		else
+			@players = Player.all
     end
   end
 

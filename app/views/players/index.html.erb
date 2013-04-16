@@ -117,7 +117,7 @@
 
 
     channel.bind('new_message', function(data) {
-        msg = data.subject;
+        msg = data.subject
         dom_notify(msg);
         title_notify(msg);
         if (window.webkitNotifications) { webkit_notify(msg); }
@@ -188,16 +188,20 @@
 
 <p>&nbsp;</p>
 
-<div class="alert alert-info" id="notify"><%= @nextteam.first.name %> is Next up!</div>
+<div>
+  <div class="alert alert-success" id="notify"><%= @nextteam.first.name %> is Next up! &nbsp;&nbsp;</div> 
+<%= link_to "Refresh", request.fullpath %></div>
 <p>&nbsp;</p>
 
-
+<div style="width: 245px;" class="alert alert-info"><strong>Your Picks:</strong><br> <%= @resultforward %> forwards | <%= @resultdefense %> defensemen | <%= @resultgoalie %> goalies</div>
 <%= link_to("Players", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'all')), :class => 'btn btn-primary') %>
 <%= link_to("Forwards", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'F')), :class => 'btn btn-primary')%>
 <%= link_to("Defensemen", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'D')), :class => 'btn btn-primary')%>
-<%= link_to("Goalies", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'G')), :class => 'btn btn-primary')%><br><br>
+<%= link_to("Goalies", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'G')), :class => 'btn btn-primary')%> 
 
 
+        <p></p>
+        <div style="height: 1000px; overflow-y: auto;">
         <table class="table table-striped">
           <tr>
             <% if params[:position]=='G'%>
@@ -271,6 +275,7 @@
           </tr>
         <% end %>
         </table>
+        <div>
 
         <br />
       </div>
