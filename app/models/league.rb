@@ -1,5 +1,5 @@
 class League < ActiveRecord::Base
-  attr_accessible :name, :commissioner_id, :user_id, :status
+  attr_accessible :name, :commissioner_id, :user_id, :status, :lr_forwards, :lr_defensemen, :lr_goalies
   has_many :teams
   has_many :picks
   has_many :players, :through => :picks

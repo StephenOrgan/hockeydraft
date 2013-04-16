@@ -1,0 +1,11 @@
+<%= form_for (@league), :url => {:controller => "leagues", :action => "update" } do |f| %>
+        <%= f.label :lr_forwards, "Number of Forwards" %><br/>
+        <%= f.text_field :lr_forwards %>
+        <%= f.label :lr_defensemen, "Number of Defensemen" %>
+        <%= f.text_field :lr_defensemen %>
+        <%= f.label :lr_goalies, "Number of Goalies" %>
+        <%= f.text_field :lr_goalies %>
+  <%= f.submit("Update") %>
+<% end %>
+
+

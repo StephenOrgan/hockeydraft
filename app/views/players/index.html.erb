@@ -190,18 +190,22 @@
 
 <div>
   <div class="alert alert-success" id="notify"><%= @nextteam.first.name %> is Next up! &nbsp;&nbsp;</div> 
-<%= link_to "Refresh", request.fullpath %></div>
+</div>
 <p>&nbsp;</p>
 
-<div style="width: 245px;" class="alert alert-info"><strong>Your Picks:</strong><br> <%= @resultforward %> forwards | <%= @resultdefense %> defensemen | <%= @resultgoalie %> goalies</div>
+<div style="width: 245px;" class="alert alert-info">
+  <strong>Your Picks:</strong><br> <%= @resultforward %> forwards | <%= @resultdefense %> defensemen | <%= @resultgoalie %> goalies
+</div>
 <%= link_to("Players", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'all')), :class => 'btn btn-primary') %>
 <%= link_to("Forwards", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'F')), :class => 'btn btn-primary')%>
 <%= link_to("Defensemen", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'D')), :class => 'btn btn-primary')%>
 <%= link_to("Goalies", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'G')), :class => 'btn btn-primary')%> 
 
-
+<div style="float: right">
+  <%= link_to "Refresh", request.fullpath %>
+</div>
         <p></p>
-        <div style="height: 1000px; overflow-y: auto;">
+        <div style="height: 350px; overflow-y: auto;">
         <table class="table table-striped">
           <tr>
             <% if params[:position]=='G'%>
@@ -264,7 +268,8 @@
                     Available, but not your turn
                   <% end %>
 
-            <% end %></td>
+            <% end %>
+          </td>
             <!-- <td> 
               <% if @team.status == 'ready_to_pick' %>
               <% if show_button(player, @league.id) %>

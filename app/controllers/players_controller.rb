@@ -77,4 +77,8 @@ class PlayersController < ApplicationController
 
   end
   helper_method :show_draftteam2
+
+  
+
+
 end
