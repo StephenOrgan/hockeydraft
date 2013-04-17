@@ -17,12 +17,12 @@ class Player < ActiveRecord::Base
     end
   end
 
-  def is_forward?(player)
-      if player.position =='C'
+  def forward?
+      if position =='C'
         true
-      elsif player.position =='L'
+      elsif position =='L'
         true
-      elsif player.position == 'R'
+      elsif position == 'R'
         true
       else 
         false
@@ -30,8 +30,8 @@ class Player < ActiveRecord::Base
   end
 
 
-  def is_defense?(player)
-      if player.position == 'D'
+  def defense?
+      if position == 'D'
         true
       else
         false
@@ -39,20 +39,20 @@ class Player < ActiveRecord::Base
   end
 
 
-  def is_goalie?(player)
-      if player.position == 'G'
+  def goalie?
+      if position == 'G'
         true
       else
         false
       end
   end
 
-      def exceeded_defense?(league, player, team)
+      def notexceed_defense?(league, team)
           picks = Pick.where(:league_id => league.id, :team_id => team.id)
           result = picks.map {|pick| pick.player.position }.each_with_object(Hash.new(0)) {|each, result| result[each] += 1 }
           resultdefense = result["D"]  
 
-          if player.position == 'D'
+          if position == 'D'
             if league.lr_defensemen > resultdefense
               true
             else
@@ -61,12 +61,12 @@ class Player < ActiveRecord::Base
           end
       end
 
-      def exceeded_forward?(league, player, team)
+      def notexceed_forward?(league, team)
           picks = Pick.where(:league_id => league.id, :team_id => team.id)
           result = picks.map {|pick| pick.player.position }.each_with_object(Hash.new(0)) {|each, result| result[each] += 1 }
           resultforward = result["C"] + result["L"] + result["R"]            
 
-          if player.position == 'C' || player.position =='L' || player.position =='R'
+          if position == 'C' || position =='L' || position =='R'
             if league.lr_forwards > resultforward
             true
           else
@@ -75,12 +75,12 @@ class Player < ActiveRecord::Base
           end
       end
 
-      def exceeded_goalie?(league, player, team)
+      def notexceed_goalie?(league, team)
           picks = Pick.where(:league_id => league.id, :team_id => team.id)
           result = picks.map {|pick| pick.player.position }.each_with_object(Hash.new(0)) {|each, result| result[each] += 1 }
           resultgoalie = result["G"]  
 
-          if player.position == 'G'
+          if position == 'G'
             if league.lr_goalies > resultgoalie
               true
             else

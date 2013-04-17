@@ -256,19 +256,41 @@
             <td>
              <% end %>
 
-            <% if show_draftteam(player, @league.id) %>
-                <%= show_draftteam2(player, @league.id) %>
-               <% else %>
-                  <% if @team.status == 'ready_to_pick' %>
-                    <% if show_button(player, @league.id) %>
-                        <%= link_to("Draft Player", '/picks/new?league_id='  + @league.id.to_s + '&team_id=' + @team.id.to_s + '&player_id=' + player.id.to_s, :class => 'btn btn-success') %>
-
-                    <% end %>
+                 <% if show_draftteam(player, @league.id) %>
+                    <%= show_draftteam2(player, @league.id) %>
+                <% else %>
+                    <% if @team.status == 'ready_to_pick'  && player.forward?%>
+                      <% if player.notexceed_forward?(@league, @team)%>      
+                        <% if show_button(player, @league.id) %>
+                          <%= link_to("Draft Player", '/picks/new?league_id='  + @league.id.to_s + '&team_id=' + @team.id.to_s + '&player_id=' + player.id.to_s, :class => 'btn btn-success') %>
+                        <% end %>
+                      <% else %>
+                      You can't draft any more forwards
+                      <% end %>
                     <% else %>
-                    Available, but not your turn
-                  <% end %>
-
-            <% end %>
+                      <% if @team.status == 'ready_to_pick'  && player.defense?%>
+                        <% if player.notexceed_defense?(@league, @team)%>      
+                          <% if show_button(player, @league.id) %>
+                              <%= link_to("Draft Player", '/picks/new?league_id='  + @league.id.to_s + '&team_id=' + @team.id.to_s + '&player_id=' + player.id.to_s, :class => 'btn btn-success') %>
+                          <% end %>
+                        <% else %>
+                      You can't draft any more defensemen
+                      <% end %>
+                      <% else %>
+                        <% if @team.status == 'ready_to_pick'  && player.goalie?%>
+                            <% if player.notexceed_goalie?(@league, @team)%>       
+                                <% if show_button(player, @league.id) %>
+                                        <%= link_to("Draft Player", '/picks/new?league_id='  + @league.id.to_s + '&team_id=' + @team.id.to_s + '&player_id=' + player.id.to_s, :class => 'btn btn-success') %>
+                                <% end %>
+                              <% else %>
+                      You can't draft any more goalies
+                      <% end %>
+                            <% else %>
+                              Not your turn
+                            <% end %>
+                          <% end %>
+                        <% end %>
+                <% end %>
           </td>
             <!-- <td> 
               <% if @team.status == 'ready_to_pick' %>
