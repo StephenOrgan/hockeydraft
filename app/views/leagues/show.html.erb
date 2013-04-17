@@ -16,7 +16,7 @@
         <% end %>
 
         <% if current_user.id == @league.user_id %>
-        <%= link_to("Configure League Rules", @league.id.to_s + '/edit', :class => 'btn btn-success') %>
+        <%= link_to("Configure League Rules", @league.id.to_s + '/edit', :class => 'btn btn-info') %>
         <% end %>
 
         <p>&nbsp;</p>
