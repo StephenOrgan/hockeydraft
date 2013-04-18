@@ -1,5 +1,5 @@
 class League < ActiveRecord::Base
-  attr_accessible :name, :commissioner_id, :user_id, :status, :lr_forwards, :lr_defensemen, :lr_goalies
+  attr_accessible :name, :commissioner_id, :user_id, :status, :lr_forwards, :lr_defensemen, :lr_goalies, :season
   has_many :teams
   has_many :picks
   has_many :players, :through => :picks
@@ -8,7 +8,6 @@ class League < ActiveRecord::Base
 
   validates :name, presence: true
 
-	before_save :assign_draft_order
 
 	state_machine :status, initial: :not_started do
 		after_transition any => :draft_started, :do => :assign_draft_order
@@ -16,6 +15,10 @@ class League < ActiveRecord::Base
 		event :start_draft do
 			transition :not_started => :draft_started
 		end
+			event :end_draft do
+			transition :draft_started => :draft_completed
+		end
+
 	end
 
 	def assign_draft_order

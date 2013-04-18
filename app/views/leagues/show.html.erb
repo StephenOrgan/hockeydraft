@@ -14,13 +14,7 @@
             </div>
           <% end %>
         <% end %>
-
-        <% if current_user.id == @league.user_id %>
-        <%= link_to("Configure League Rules", @league.id.to_s + '/edit', :class => 'btn btn-info') %>
-        <% end %>
-
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
+       
 
            
             <% if ((current_user.id == @league.user_id) && (@league.status == 'not_started')) %>
@@ -32,10 +26,24 @@
               <% end %>
             <% end %>
 
-        
-
-        <div class="alert alert-info">
+        <div class="span4">
+        <% if current_user.id == @league.user_id %>
+          <%= link_to("Configure League Rules", @league.id.to_s + '/edit', :class => 'btn btn-info') %>
+         <% end %>
+      </div>
+          <p>&nbsp;</p>
+         <p>&nbsp;</p>
+        <div class="alert alert-info span4" style="float: left;">
           Commissioner: <%= @commiss.email %>
+        <br>
+        <% if @league.status == 'draft_completed' %>
+        <span style="color: green"><strong>Statu<%= @league.name %> Draft is finished!</strong></span>
+        
+        <% else %>
+        <% if @league.status == 'draft_started' %>
+        <span style="color: green"><strong><%= @league.name %> Draft is in progress!</strong></span>
+        <% end %>
+        <% end %>
         </div>
 
       <table class="table table-striped">
