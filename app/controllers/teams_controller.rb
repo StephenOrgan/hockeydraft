@@ -12,6 +12,7 @@ class TeamsController < ApplicationController
   # GET /leagues/1.json
   def show
     @team = Team.find(params[:id])
+    @picks = @team.picks
     
     respond_to do |format|
       format.html # show.html.erb

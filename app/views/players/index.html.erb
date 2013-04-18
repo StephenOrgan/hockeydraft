@@ -189,7 +189,7 @@
 <p>&nbsp;</p>
 
 <div>
-  <div class="alert alert-success" id="notify"><%= @nextteam.first.name %> is Next up! &nbsp;&nbsp;</div> 
+  <div class="alert" id="notify"><%= @nextteam.first.name %> is Next up! &nbsp;&nbsp;</div> 
 </div>
 <p>&nbsp;</p>
 
@@ -255,9 +255,9 @@
             <td><%= player.gwg %></td>
             <td>
              <% end %>
-
+                  <!-- start of Draft Options -->
                  <% if show_draftteam(player, @league.id) %>
-                    <%= show_draftteam2(player, @league.id) %>
+                    <span class="label label-success"><%= show_draftteam2(player, @league.id) %></span>
                 <% else %>
                     <% if @team.status == 'ready_to_pick'  && player.forward?%>
                       <% if player.notexceed_forward?(@league, @team)%>      
@@ -265,7 +265,7 @@
                           <%= link_to("Draft Player", '/picks/new?league_id='  + @league.id.to_s + '&team_id=' + @team.id.to_s + '&player_id=' + player.id.to_s, :class => 'btn btn-success') %>
                         <% end %>
                       <% else %>
-                      You can't draft any more forwards
+                      <span class="label label-warning">You can't draft any more forwards</span>
                       <% end %>
                     <% else %>
                       <% if @team.status == 'ready_to_pick'  && player.defense?%>
@@ -274,7 +274,7 @@
                               <%= link_to("Draft Player", '/picks/new?league_id='  + @league.id.to_s + '&team_id=' + @team.id.to_s + '&player_id=' + player.id.to_s, :class => 'btn btn-success') %>
                           <% end %>
                         <% else %>
-                      You can't draft any more defensemen
+                      <span class="label label-warning">You can't draft any more defensemen</span>
                       <% end %>
                       <% else %>
                         <% if @team.status == 'ready_to_pick'  && player.goalie?%>
@@ -283,14 +283,15 @@
                                         <%= link_to("Draft Player", '/picks/new?league_id='  + @league.id.to_s + '&team_id=' + @team.id.to_s + '&player_id=' + player.id.to_s, :class => 'btn btn-success') %>
                                 <% end %>
                               <% else %>
-                      You can't draft any more goalies
+                      <span class="label label-warning">You can't draft any more goalies</span>
                       <% end %>
                             <% else %>
-                              Not your turn
+                              <span class="label label-important">Not Your Turn</span>
                             <% end %>
                           <% end %>
                         <% end %>
                 <% end %>
+          <!-- end of Draft Options -->
           </td>
             <!-- <td> 
               <% if @team.status == 'ready_to_pick' %>

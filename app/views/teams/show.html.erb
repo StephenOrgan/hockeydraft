@@ -1,0 +1,28 @@
+<% if user_signed_in? %>
+
+<div class="containter-fluid">
+  <div class="row-fluid" id="pageHeader">
+    <div class="span12" style="height:750px; background-color:white; color:black; padding-top:20px; padding-left: 20px">
+            <h1><%= @team.name %>'s Picks</h1>
+
+            <table class="table table-striped">
+              <tr>
+                <th>Player Name</th>
+                <th>Position</th>
+              </tr>
+
+            <% @picks.each do |pick| %>
+              <tr>
+                <td><%= pick.player.name %></td>
+                <td><%= pick.player.position %></td>
+              </tr>
+            <% end %>
+            </table>
+
+            <br />
+
+            
+</div>
+  </div>
+</div>
+            <% end %>
