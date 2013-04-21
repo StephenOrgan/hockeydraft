@@ -15,17 +15,13 @@ class League < ActiveRecord::Base
 		event :start_draft do
 			transition :not_started => :draft_started
 		end
-<<<<<<< HEAD
 
 		event :end_draft do
 	 		transition :draft_started => :draft_completed
 		end
-=======
 			event :end_draft do
 			transition :draft_started => :draft_completed
 		end
-
->>>>>>> 62e75a324a04e00e30a51230deab0118588f897b
 	end
 
 	def assign_draft_order
