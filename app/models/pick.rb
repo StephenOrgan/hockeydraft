@@ -23,6 +23,14 @@ class Pick < ActiveRecord::Base
 		teams = Team.where(:league_id => league_id)
 		nextteamup = teams.where(:draftrank => team.draftrank - 1)
 		nextteamdown = teams.where(:draftrank => team.draftrank + 1)
+		leagueteams = league.teams.count
+		leaguemax = leagueteams * (league.lr_forwards + league.lr_defensemen + league.lr_goalies)
+		leaguepicks = league.picks.count
+
+
+		if leaguepicks == leaguemax 
+		league.end_draft
+		end
 
 		if (team.direction == 'down')
 			if nextteamdown.blank?

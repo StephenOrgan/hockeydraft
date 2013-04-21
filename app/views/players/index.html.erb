@@ -197,8 +197,14 @@
 
 <p>&nbsp;</p>
 
-<div>
-  <div class="alert" id="notify"><%= @nextteam.first.name %> is Next up! &nbsp;&nbsp;</div> 
+<div> 
+  <div class="alert" id="notify">
+    <% if @league.status == 'draft_completed' %> 
+    <span style="color: green;"><strong><%= @league.name %>'s draft is completed! &nbsp;&nbsp;</strong></span>
+    <% else %>
+    <%= @nextteam.first.name %> is Next up! &nbsp;&nbsp;
+    <% end %>
+  </div> 
 </div>
 <p>&nbsp;</p>
 
