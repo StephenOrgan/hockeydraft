@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130416031020) do
+ActiveRecord::Schema.define(:version => 20130418045458) do
 
   create_table "leagues", :force => true do |t|
     t.string   "name"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20130416031020) do
     t.integer  "lr_forwards"
     t.integer  "lr_defensemen"
     t.integer  "lr_goalies"
+    t.string   "season"
   end
 
   create_table "picks", :force => true do |t|

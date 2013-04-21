@@ -1,5 +1,9 @@
 Hockeydraft::Application.routes.draw do
   
+  post 'drafts/:league_id' => 'drafts#create', :as => 'drafts'
+
+  get "drafts/create"
+
   match 'user' => 'user#index'
   
   devise_for :users

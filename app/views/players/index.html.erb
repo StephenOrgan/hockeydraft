@@ -110,6 +110,18 @@
   </script>
   <script type="text/javascript" charset="utf-8">
   $(function() {
+    
+    function refreshStats() {
+      $.get(window.location.href, function(html) {
+        $("#pick-table").html($(html).find("#pick-table").html());
+      });
+    }
+
+    $(".refresh-stats").click(function(e) {
+      e.preventDefault();
+      refreshStats();
+    });
+
     var pusher = new Pusher('221f87b0aba422a3df7e'); // Replace with your app key
     
     
@@ -120,17 +132,14 @@
         msg = data.subject
         dom_notify(msg);
         title_notify(msg);
+        refreshStats();
         if (window.webkitNotifications) { webkit_notify(msg); }
       });
-      
+
       // In DOM alert
       function dom_notify(msg) {
         $('#notify').text(msg);
         $('#notify').fadeIn();
-        setTimeout(function() {
-          $('#notify').fadeOut
-          ();
-        }, 2000000);
       }
       
       // <title> msg
@@ -202,11 +211,11 @@
 <%= link_to("Goalies", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'G')), :class => 'btn btn-primary')%> 
 
 <div style="float: right">
-  <%= link_to "Refresh", request.fullpath %>
+  <%= link_to "Refresh", request.fullpath, class: 'refresh-stats' %>
 </div>
         <p></p>
         <div style="height: 350px; overflow-y: auto;">
-        <table class="table table-striped">
+        <table class="table table-striped" id='pick-table'>
           <tr>
             <% if params[:position]=='G'%>
             <th><b>Player</b></td>
@@ -260,7 +269,7 @@
                     <span class="label label-success"><%= show_draftteam2(player, @league.id) %></span>
                 <% else %>
                     <% if @team.status == 'ready_to_pick'  && player.forward?%>
-                      <% if player.notexceed_forward?(@league, @team)%>      
+                      <% if player.notexceed_forward?(@league, @team) %>      
                         <% if show_button(player, @league.id) %>
                           <%= link_to("Draft Player", '/picks/new?league_id='  + @league.id.to_s + '&team_id=' + @team.id.to_s + '&player_id=' + player.id.to_s, :class => 'btn btn-success') %>
                         <% end %>

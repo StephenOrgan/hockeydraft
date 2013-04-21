@@ -25,11 +25,11 @@
            
             <% if ((current_user.id == @league.user_id) && (@league.status == 'not_started')) %>
               <div style="padding-top: 30px;">
-              <%= form_for@league, :method => :put do |f| %>
-              <%= f.hidden_field :status, :value => 'draft_started' %>
-              <%= f.submit 'Start Draft', :class => 'btn btn-danger' %>(only you can start this)
+                <%= form_tag drafts_path(@league) do %>
+                  <%= submit_tag 'Start Draft', :class => 'btn btn-danger' %>(only you can start this)
+              
+                <% end %>
               </div>
-              <% end %>
             <% end %>
 
         
