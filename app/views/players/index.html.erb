@@ -196,17 +196,9 @@
         <h1><%= @team.name %> Draft</h1>
 
 <p>&nbsp;</p>
-<<<<<<< HEAD
 
 <div> 
-  <div class="alert" id="notify">
-    <% if @league.status == 'draft_completed' %> 
-    <span style="color: green;"><strong><%= @league.name %>'s draft is completed! &nbsp;&nbsp;</strong></span>
-    <% else %>
-    <%= @nextteam.first.name %> is Next up! &nbsp;&nbsp;
-    <% end %>
-  </div> 
-=======
+ 
 <% if @league.status == 'draft_completed' %>
 <div>
   <div class="alert alert-success"><%= @league.name %> Draft is finished! &nbsp;&nbsp;</div> 
@@ -214,13 +206,13 @@
 <% else %>
 <div>
   <div class="alert" id="notify"><%= @nextteam.first.name %> is Next up! &nbsp;&nbsp;</div> 
->>>>>>> 62e75a324a04e00e30a51230deab0118588f897b
 </div>
 <% end %>
 <p>&nbsp;</p>
 
 <div style="width: 245px;" class="alert alert-info">
-  <strong>Your Picks:</strong><br> <%= @resultforward %> forwards | <%= @resultdefense %> defensemen | <%= @resultgoalie %> goalies
+  <strong>Your Picks:</strong><br> <%= @resultforward %> forwards | <%= @resultdefense %> defensemen | <%= @resultgoalie %> goalies<br>
+  <strong>Draft Order:</strong> <%= @team.draftrank %> of <%= @league.teams.count %>
 </div>
 <%= link_to("Players", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'all')), :class => 'btn btn-primary') %>
 <%= link_to("Forwards", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'F')), :class => 'btn btn-primary')%>
