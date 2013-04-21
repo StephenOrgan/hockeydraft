@@ -10,6 +10,12 @@ class Team < ActiveRecord::Base
   validates :name, presence: true
   validates :league, presence: true
 
+  after_save :after_team_created
+
+  def after_team_created
+    Pusher['private-'+ league.id.to_s].trigger('new_message', {:from => 'league_name', :subject => self.name + 'has joined ' + league.name})
+  end
+
 	# def owner_of?(team_id)
 	 #  team.find do |t| 
    #	t.user_id == current_user.id

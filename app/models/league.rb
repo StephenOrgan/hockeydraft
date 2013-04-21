@@ -25,11 +25,14 @@ class League < ActiveRecord::Base
 	end
 
 	def assign_draft_order
+		@leagueid = self.id
 		Rails.logger.debug "\n>> assign_draft_order\n"
 		Rails.logger.debug "\nteams.empty? #{teams.empty?}\n"
 		return if teams.empty?
 
+		Pusher['private-'+ @leagueid.to_s].trigger('new_message', {:from => 'league_name', :subject => 'Draft has started!'})
 		teams.each { |n| n.update_attribute(:draftrank, 0) }
+
 
 		i = 1
 		teams.order("RANDOM()").each do |team|
@@ -39,6 +42,7 @@ class League < ActiveRecord::Base
 		t = teams.where(:draftrank => 1)
 		t.first.update_attributes(:status => 'ready_to_pick')
 	end
+
 
 end
 

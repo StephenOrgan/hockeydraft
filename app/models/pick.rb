@@ -31,7 +31,9 @@ class Pick < ActiveRecord::Base
 
 		if leaguepicks == leaguemax 
 		league.end_draft
-		end
+		Pusher['private-'+league_id.to_s].trigger('new_message', {:from => 'league_name', :subject => team.name + 'has selected ' + player.name + '. ' + league.name + ' draft is complete!'})
+		
+		else
 
 		if (team.direction == 'down')
 			if nextteamdown.blank?
@@ -60,6 +62,7 @@ class Pick < ActiveRecord::Base
 				end
 			end
 		end
+	end
 	end
 end
 
