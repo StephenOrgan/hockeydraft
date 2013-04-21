@@ -196,6 +196,7 @@
         <h1><%= @team.name %> Draft</h1>
 
 <p>&nbsp;</p>
+<<<<<<< HEAD
 
 <div> 
   <div class="alert" id="notify">
@@ -205,7 +206,17 @@
     <%= @nextteam.first.name %> is Next up! &nbsp;&nbsp;
     <% end %>
   </div> 
+=======
+<% if @league.status == 'draft_completed' %>
+<div>
+  <div class="alert alert-success"><%= @league.name %> Draft is finished! &nbsp;&nbsp;</div> 
 </div>
+<% else %>
+<div>
+  <div class="alert" id="notify"><%= @nextteam.first.name %> is Next up! &nbsp;&nbsp;</div> 
+>>>>>>> 62e75a324a04e00e30a51230deab0118588f897b
+</div>
+<% end %>
 <p>&nbsp;</p>
 
 <div style="width: 245px;" class="alert alert-info">
