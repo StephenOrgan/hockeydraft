@@ -2,6 +2,7 @@ class PlayersController < ApplicationController
 
 	
 	def index
+		#@players = Player.where("name like ?", "%#{params[:name]}%")
 		@league = League.find(params[:league_id])
 		@team = Team.find(params[:team_id])
 		#@takenpicks = Pick.where(:league_id=> @league)
@@ -18,6 +19,8 @@ class PlayersController < ApplicationController
 		#@takenteam = 
 		#@playerpicks = Player.where(:id == Pick.player_id)
 
+		
+
 		case params[:position]
 		when 'all'
     	@players = Player.where("position = 'C' OR position = 'L' OR position = 'R' OR position = 'D'")
@@ -28,9 +31,19 @@ class PlayersController < ApplicationController
 		when 'D'
 			@players = Player.where("position = 'D'")
 		else
+			if params[:name].present?
+    	@players = Player.where("name like ?", "%#{params[:name]}%")
+    	else
 			@players = Player.all
     end
   end
+
+  end
+
+  # case params[:name]
+		# when present?
+  #   	@players = Player.where("name like ?", "%#{params[:name]}%")
+  # end
 
 	def new
 		@player = Player.new

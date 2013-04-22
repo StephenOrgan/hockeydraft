@@ -218,6 +218,17 @@
 <%= link_to("Forwards", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'F')), :class => 'btn btn-primary')%>
 <%= link_to("Defensemen", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'D')), :class => 'btn btn-primary')%>
 <%= link_to("Goalies", url_for(params.merge(:league_id => @league.id, :team_id => @team.id,  :position => 'G')), :class => 'btn btn-primary')%> 
+<p>&nbsp;</p>
+
+<%= form_tag (request.fullpath), method: :get do %>
+  Search: <%= text_field_tag :name, 
+  params[:name] %>
+  <%= hidden_field_tag :league_id, 
+  @league.id %>
+  <%= hidden_field_tag :team_id, 
+  @team.id %>
+  <%= submit_tag "Search", :class => 'btn btn-info' %>
+<% end %>
 
 <div style="float: right">
   <%= link_to "Refresh", request.fullpath, class: 'refresh-stats' %>
