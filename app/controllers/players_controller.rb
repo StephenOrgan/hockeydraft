@@ -32,7 +32,7 @@ class PlayersController < ApplicationController
 			@players = Player.where("position = 'D'")
 		else
 			if params[:name].present?
-    	@players = Player.where("name like ?", "%#{params[:name]}%")
+    	@players = Player.where("name ilike ?", "%#{params[:name]}%")
     	else
 			@players = Player.all
     end
