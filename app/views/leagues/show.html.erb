@@ -218,17 +218,19 @@
           <br>
           <p>&nbsp;</p>
          <p>&nbsp;</p>
-        <div class="alert alert-info span4">
+        <div class="alert alert-info span5">
           Commissioner: <%= @commiss.email %>
         <br>
         <% if @league.status == 'draft_completed' %>
-        <span style="color: green"><strong>Statu<%= @league.name %> Draft is finished!</strong></span>
+        <span style="color: green"><strong>Status<%= @league.name %> Draft is finished!</strong></span>
         
         <% else %>
         <% if @league.status == 'draft_started' %>
         <span style="color: green"><strong><%= @league.name %> Draft is in progress!</strong></span>
         <% end %>
         <% end %>
+        <br>
+        <strong>League Rules: </strong> Forwards: <%= @league.lr_forwards %> | Defensemen: <%= @league.lr_defensemen %> | Goalies: <%= @league.lr_goalies %> 
         </div>
 
       <table class="table table-striped" id='team-table'>
